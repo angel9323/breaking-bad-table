@@ -12,5 +12,6 @@ export const TRANSLATIONS_ES = {
   english: 'Ingés',
   breakingBadCharacters: 'Personajes Breaking bad',
   back: 'Atrás',
-  error: 'Lo sentimos, hubo un error, intenta recargar'
+  error: 'Lo sentimos, hubo un error, intenta recargar',
+  search: "Buscar",
  };

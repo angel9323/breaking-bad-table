@@ -2,9 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Character from '../interfaces/Character'
 import { AppThunk } from "./store";
 import { getAllCharacters } from '../services/api';
+import type { RootState } from './store';
 
 interface CharactersSliceProps {
     charactersList: Character[];
+    characterListSearched: Character[];
     loading: boolean;
     hasData: boolean;
     errorUnknown: boolean;
@@ -13,6 +15,7 @@ interface CharactersSliceProps {
 
 const initialState: CharactersSliceProps = {
     charactersList: [],
+    characterListSearched: [],
     loading: true,
     hasData: false,
     errorUnknown: false,
@@ -27,6 +30,9 @@ export const charactersSlice = createSlice({
             state.loading = false;
             state.hasData = true;
         },
+        setCharacterListSearched: (state, action: PayloadAction<Character[]>) => {
+            state.characterListSearched = action.payload;
+        },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
@@ -36,12 +42,13 @@ export const charactersSlice = createSlice({
     }
 })
 
-export const { setCharacterList, setLoading, setErrorUnknown } = charactersSlice.actions;
+export const { setCharacterList, setCharacterListSearched, setLoading, setErrorUnknown } = charactersSlice.actions;
 
-export const selectCharactersList = (state: any) => state.characters.charactersList;
-export const selectLoading = (state: any) => state.characters.loading;
-export const selectHasData = (state: any) => state.characters.hasData;
-export const selectErrorUnknown = (state: any) => state.characters.errorUnknown;
+export const selectCharactersList = (state: RootState) => state.characters.charactersList;
+export const selectCharactersListSearched = (state: RootState) => state.characters.characterListSearched;
+export const selectLoading = (state: RootState) => state.characters.loading;
+export const selectHasData = (state: RootState) => state.characters.hasData;
+export const selectErrorUnknown = (state: RootState) => state.characters.errorUnknown;
 
 export const getCharacterList = (): AppThunk => async (dispatch) => {
     try{
@@ -50,6 +57,16 @@ export const getCharacterList = (): AppThunk => async (dispatch) => {
     }catch(e){
         dispatch(setErrorUnknown());
     }
+}
+
+export const searchCharacters = (searchValue: string): AppThunk => (
+    dispatch, getState) => {
+        const characters = getState().characters.charactersList.filter(
+            character => Object.values(character).some(val => 
+                val.toString().toLowerCase().includes(searchValue.toLowerCase())
+            )
+        );
+        dispatch(setCharacterListSearched(characters));
 }
 
 export default charactersSlice.reducer;

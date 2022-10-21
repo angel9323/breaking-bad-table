@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import useCharacterTable from './hooks/useCharacterTable';
 import Loading from '../../components/loading';
+import Searcher from '../../components/searcher';
 import { Box,Typography } from "@mui/material";
 import './styles.scss';
 import ToastError from '../../components/toastError';
@@ -23,6 +24,7 @@ const CharacterTable = () => {
         variant="h3" component="div" gutterBottom={true} >
           {breakingBadCharacters}
         </Typography>
+        <Searcher />
         <Box sx={{ height: 635, width: "100%" }}>
           <DataGrid
             rows={rows}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo} from 'react';
-import { selectCharactersList, selectErrorUnknown, getCharacterList } from '../../../redux/charactersSlice';
+import { selectCharactersList, selectErrorUnknown, selectCharactersListSearched, getCharacterList } from '../../../redux/charactersSlice';
 import Character from '../../../interfaces/Character'
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { useTranslation } from "react-i18next";
@@ -25,6 +25,7 @@ const useCharacterTable = (): UseCharacterList => {
     const dispatch = useAppDispatch();
     const errorUnknown = useAppSelector((state: any) => selectErrorUnknown(state));
     const charactersInStore = useAppSelector((state: any) => selectCharactersList(state));
+    const charactersSearched = useAppSelector((state: any) => selectCharactersListSearched(state));
 
     const { t } = useTranslation();
     const breakingBadCharacters = t('breakingBadCharacters');
@@ -43,7 +44,8 @@ const useCharacterTable = (): UseCharacterList => {
     }, [birthdayColumn, nameColumn, nicknameColumn, statusColumn]);
 
     const rows = useMemo<Row[]>(() => {
-      return charactersInStore.map((character: Character, index: number) => {
+      const list = charactersSearched.length > 0 ? charactersSearched : charactersInStore
+      return list.map((character: Character, index: number) => {
         const row: Row = {
           id: index,
           name: character.name,
@@ -53,7 +55,7 @@ const useCharacterTable = (): UseCharacterList => {
         }
         return row
       });
-    }, [charactersInStore]);
+    }, [charactersInStore, charactersSearched]);
 
     useEffect(() => {
       if(charactersInStore && charactersInStore.length === 0) {

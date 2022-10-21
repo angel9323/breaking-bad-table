@@ -13,4 +13,5 @@ export const TRANSLATIONS_EN = {
   breakingBadCharacters: 'Breaking bad characters',
   back: 'Back',
   error: 'Sorry, It was an error, try to reload',
+  search: "Search",
 };
