@@ -1,18 +1,11 @@
 import { useEffect, useMemo} from 'react';
 import { selectCharactersList, selectErrorUnknown, selectCharactersListSearched, getCharacterList } from '../../../redux/charactersSlice';
-import Character from '../../../interfaces/Character'
+import Character from '../../../interfaces/Character';
+import Row from '../../../interfaces/Row';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { useTranslation } from "react-i18next";
 import { getConfigColumnsCharacters } from '../../../util/dataGridHelper';
 import { GridColDef } from '@mui/x-data-grid';
-
-interface Row {
-  id: number,
-  name: string,
-  birthday: string,
-  status: string,
-  nickname: string,
-};
 
 interface UseCharacterList {
   charactersInStore: Character[];
@@ -47,7 +40,7 @@ const useCharacterTable = (): UseCharacterList => {
       const list = charactersSearched.length > 0 ? charactersSearched : charactersInStore
       return list.map((character: Character, index: number) => {
         const row: Row = {
-          id: index,
+          id: character.char_id,
           name: character.name,
           birthday: character.birthday,
           status: character.status,

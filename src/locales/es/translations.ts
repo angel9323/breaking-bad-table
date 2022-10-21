@@ -13,5 +13,6 @@ export const TRANSLATIONS_ES = {
   breakingBadCharacters: 'Personajes Breaking bad',
   back: 'Atrás',
   error: 'Lo sentimos, hubo un error, intenta recargar',
-  search: "Buscar",
+  search: 'Buscar',
+  remove: 'Borrar',
  };

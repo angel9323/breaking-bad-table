@@ -1,5 +1,4 @@
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import { searchCharacters } from '../../redux/charactersSlice';
 import { useAppDispatch } from '../../redux/store';
 import { useTranslation } from "react-i18next";
@@ -14,9 +13,7 @@ const Searcher = () => {
     }
 
     return (
-      <Box>
-        <TextField label={searchLabel} onChange={onChangeValue} />
-      </Box>
+        <TextField sx={{ width: "30%" }} label={searchLabel} onChange={onChangeValue} />
     );
   }
   
