@@ -1,0 +1,16 @@
+export const TRANSLATIONS_EN = {
+  characters: "CHARACTERS",
+  name: 'Name',
+  birthday: 'Birthday',
+  occupation: 'Occupation',
+  status: 'Status',
+  appearance: 'Appearance',
+  nickname: 'Nickname',
+  portrayed: 'Portrayed',
+  otherQuote: 'Other quote',
+  spanish: 'Spanish',
+  english: 'English',
+  breakingBadCharacters: 'Breaking bad characters',
+  back: 'Back',
+  error: 'Sorry, It was an error, try to reload',
+};
