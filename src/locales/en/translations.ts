@@ -15,4 +15,8 @@ export const TRANSLATIONS_EN = {
   error: 'Sorry, It was an error, try to reload',
   search: 'Search',
   remove: 'Remove',
+  removeModalTitle: 'Are you sure you want to delete the selected rows?',
+  removeModalBody: 'The selected rows will be removed from the table',
+  accept: 'Accept',
+  cancel: 'Cancel',
 };

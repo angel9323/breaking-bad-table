@@ -81,6 +81,7 @@ export const searchCharacters = (searchValue: string): AppThunk => (
 
 export const removeCharacters = (charactersRemoved: Character[], newCharacterList: Character[]): AppThunk => (
     dispatch, getState) => {
+        debugger;
         dispatch(setCharacterListRemoved({charactersRemoved, newCharacterList}));
         if ( getState().characters.characterListSearched.length > 0 ) {
             const newListSearched = getState().characters.characterListSearched.filter(char => !charactersRemoved.includes(char));

@@ -15,4 +15,8 @@ export const TRANSLATIONS_ES = {
   error: 'Lo sentimos, hubo un error, intenta recargar',
   search: 'Buscar',
   remove: 'Borrar',
+  removeModalTitle: '¿Seguro que quieres eliminar las filas selecciondas?',
+  removeModalBody: 'Se eliminarán de la tabla las filas seleccionadas',
+  accept: 'Aceptar',
+  cancel: 'Cancelar',
  };

@@ -1,5 +1,5 @@
 import { useEffect, useMemo} from 'react';
-import { selectCharactersList, selectErrorUnknown, selectCharactersListSearched, getCharacterList } from '../../../redux/charactersSlice';
+import { selectCharactersList, selectErrorUnknown, selectCharactersListSearched, getCharacterList, selectHasData } from '../../../redux/charactersSlice';
 import Character from '../../../interfaces/Character';
 import Row from '../../../interfaces/Row';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
@@ -8,17 +8,19 @@ import { getConfigColumnsCharacters } from '../../../util/dataGridHelper';
 import { GridColDef } from '@mui/x-data-grid';
 
 interface UseCharacterList {
-  charactersInStore: Character[];
+  characterList: Character[];
   errorUnknown: boolean;
   columns: GridColDef[];
   rows: Row[];
+  hasData: boolean;
 };
 
 const useCharacterTable = (): UseCharacterList => {
     const dispatch = useAppDispatch();
     const errorUnknown = useAppSelector((state: any) => selectErrorUnknown(state));
-    const charactersInStore = useAppSelector((state: any) => selectCharactersList(state));
+    const characterList = useAppSelector((state: any) => selectCharactersList(state));
     const charactersSearched = useAppSelector((state: any) => selectCharactersListSearched(state));
+    const hasData = useAppSelector((state: any) => selectHasData(state));
 
     const { t } = useTranslation();
     const breakingBadCharacters = t('breakingBadCharacters');
@@ -37,7 +39,8 @@ const useCharacterTable = (): UseCharacterList => {
     }, [birthdayColumn, nameColumn, nicknameColumn, statusColumn]);
 
     const rows = useMemo<Row[]>(() => {
-      const list = charactersSearched.length > 0 ? charactersSearched : charactersInStore
+      debugger;
+      const list = charactersSearched.length > 0 ? charactersSearched : characterList
       return list.map((character: Character, index: number) => {
         const row: Row = {
           id: character.char_id,
@@ -48,19 +51,16 @@ const useCharacterTable = (): UseCharacterList => {
         }
         return row
       });
-    }, [charactersInStore, charactersSearched]);
+    }, [characterList, charactersSearched]);
 
     useEffect(() => {
-      if(charactersInStore && charactersInStore.length === 0) {
+      if(!hasData) {
         dispatch(getCharacterList());
       }
-    }, [charactersInStore, dispatch]);
-
-    const state = useMemo(() => ({ charactersInStore, errorUnknown,
-      columns, rows}), 
-    [charactersInStore, errorUnknown, columns, rows]);
+    }, [dispatch, hasData]);
     
-  return { ...state };
+  return { characterList, errorUnknown, hasData,
+    columns, rows} ;
 
 }
 
