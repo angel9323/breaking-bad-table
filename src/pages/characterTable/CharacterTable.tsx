@@ -1,8 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { useState } from 'react';
 import useCharacterTable from './hooks/useCharacterTable';
 import Loading from '../../components/loading';
-import { Box,Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 import './styles.scss';
 import ToastError from '../../components/toastError';
 import ActionBar from '../../components/actionBar';
@@ -15,8 +14,6 @@ const CharacterTable = () => {
     const { characterList, errorUnknown, hasData, columns, rows} = useCharacterTable();
     const [selectedRows, setSelectedRows] = useState<GridSelectionModel>([]);
     const [modalProps, setModalProps] = useState<ModalProps>({open: false, character: undefined});
-    const { t } = useTranslation();
-    const breakingBadCharacters = t('breakingBad');
 
     if (!hasData){
         return <Loading />
@@ -32,10 +29,6 @@ const CharacterTable = () => {
       <Box>
         <ToastError error={errorUnknown} />
         <CardModal modalProps={modalProps} setModalProps={setModalProps} />
-        <Typography sx={{ textTransform: 'uppercase', color: '#ae8c34', marginLeft: '40%', marginTop: '1%' }} 
-        variant="h3" component="div" gutterBottom={true} >
-          {breakingBadCharacters}
-        </Typography>
         <ActionBar characterList={characterList} selectedRows={selectedRows} />
         <Box sx={{ height: 632, width: "100%",}}>
           <DataGrid

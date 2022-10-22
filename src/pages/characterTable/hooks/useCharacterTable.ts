@@ -23,14 +23,10 @@ const useCharacterTable = (): UseCharacterList => {
     const hasData = useAppSelector((state: any) => selectHasData(state));
 
     const { t } = useTranslation();
-    const breakingBadCharacters = t('breakingBadCharacters');
     const nameColumn = t('name');
     const birthdayColumn = t('birthday');
-    const occupationColumn = t('occupation');
     const statusColumn = t('status');
-    const appearanceColumn = t('appearance');
     const nicknameColumn = t('nickname');
-    const portrayedColumn = t('portrayed');
     const descriptionColumn = t('description');
     
     const columns = useMemo(() => {
