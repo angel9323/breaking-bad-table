@@ -39,6 +39,10 @@ export const charactersSlice = createSlice({
             state.characterListRemoved = [...state.characterListRemoved, ...action.payload.charactersRemoved];
             state.charactersList = [...action.payload.newCharacterList];
         },
+        setAddCharacter: (state, action: PayloadAction<Character>) => {
+            state.charactersList = [action.payload, ...state.charactersList];
+            state.characterListRemoved = state.characterListRemoved.filter(char => char.char_id !== action.payload.char_id);
+        },
         removeFromListSearched: (state, action: PayloadAction<Character[]>) => {
             state.characterListSearched = action.payload;
         },
@@ -51,11 +55,12 @@ export const charactersSlice = createSlice({
     }
 })
 
-export const { setCharacterList, setCharacterListSearched, setCharacterListRemoved,
+export const { setCharacterList, setCharacterListSearched, setCharacterListRemoved, setAddCharacter,
     removeFromListSearched, setLoading, setErrorUnknown } = charactersSlice.actions;
 
 export const selectCharactersList = (state: RootState) => state.characters.charactersList;
 export const selectCharactersListSearched = (state: RootState) => state.characters.characterListSearched;
+export const selectCharactersListRemoved = (state: RootState) => state.characters.characterListRemoved;
 export const selectLoading = (state: RootState) => state.characters.loading;
 export const selectHasData = (state: RootState) => state.characters.hasData;
 export const selectErrorUnknown = (state: RootState) => state.characters.errorUnknown;
@@ -81,12 +86,20 @@ export const searchCharacters = (searchValue: string): AppThunk => (
 
 export const removeCharacters = (charactersRemoved: Character[], newCharacterList: Character[]): AppThunk => (
     dispatch, getState) => {
-        debugger;
         dispatch(setCharacterListRemoved({charactersRemoved, newCharacterList}));
         if ( getState().characters.characterListSearched.length > 0 ) {
             const newListSearched = getState().characters.characterListSearched.filter(char => !charactersRemoved.includes(char));
             dispatch(removeFromListSearched(newListSearched));
         }
 }
+
+// export const addCharacter = (character: Character): AppThunk => (
+//     dispatch, getState) => {
+//         dispatch(setCharacterListRemoved({charactersRemoved, newCharacterList}));
+//         if ( getState().characters.characterListSearched.length > 0 ) {
+//             const newListSearched = getState().characters.characterListSearched.filter(char => !charactersRemoved.includes(char));
+//             dispatch(removeFromListSearched(newListSearched));
+//         }
+// }
 
 export default charactersSlice.reducer;

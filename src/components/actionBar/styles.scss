@@ -6,3 +6,19 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+
+.buttonBox {
+    display: flex;
+    align-items: end;
+}
+
+.addButton {
+    margin-right: 10% !important;
+    width: 10vh;
+    height: 40px;
+}
+
+.removeButton {
+    width: 10vh;
+    height: 40px;
+}

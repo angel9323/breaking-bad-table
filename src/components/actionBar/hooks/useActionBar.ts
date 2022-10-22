@@ -1,7 +1,7 @@
 import { useCallback, useState} from 'react';
 import Character from '../../../interfaces/Character';
-import { useAppDispatch } from '../../../redux/store';
-import { searchCharacters } from '../../../redux/charactersSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { searchCharacters, selectCharactersListRemoved, setAddCharacter } from '../../../redux/charactersSlice';
 import { removeCharacters } from '../../../redux/charactersSlice';
 import { GridSelectionModel  } from '@mui/x-data-grid';
 
@@ -13,6 +13,9 @@ interface UseActionBarProps {
 const useActionBar = ({characterList, selectedRows}: UseActionBarProps) => {
     const dispatch = useAppDispatch();
     const [open, setOpen] = useState(false);
+    const [openAddModal, setOpenAddModal] = useState(false);
+
+    const charactersRemoved = useAppSelector((state: any) => selectCharactersListRemoved(state));
 
     const onChangeValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(searchCharacters(event.target.value));
@@ -22,14 +25,25 @@ const useActionBar = ({characterList, selectedRows}: UseActionBarProps) => {
         setOpen(true);
       }, [])
 
-      const onClickAcceptModal = useCallback(() => {
+    const onClickAcceptModal = useCallback(() => {
         const rowsSeleted = characterList.filter(char => selectedRows.includes(char.char_id));
         const newCharacterList = characterList.filter(char => !selectedRows.includes(char.char_id));
         dispatch(removeCharacters(rowsSeleted, newCharacterList));
         setOpen(false);
-      }, [characterList, dispatch, selectedRows])
+    }, [characterList, dispatch, selectedRows])
+
+    const onClickAdd = useCallback(() => {
+      setOpenAddModal(true);
+    }, [])
+
+    const onClickCharacter = useCallback((character: Character) => {
+      dispatch(setAddCharacter(character));
+      setOpenAddModal(false);
+    }, [])
     
-  return { onChangeValue, onClickRemoveButton, onClickAcceptModal, open, setOpen };
+  return { charactersRemoved, onChangeValue, onClickRemoveButton, 
+    onClickAcceptModal, open, setOpen, openAddModal, setOpenAddModal, onClickAdd,
+    onClickCharacter };
 
 }
 

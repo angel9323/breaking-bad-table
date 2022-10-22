@@ -39,7 +39,6 @@ const useCharacterTable = (): UseCharacterList => {
     }, [birthdayColumn, nameColumn, nicknameColumn, statusColumn]);
 
     const rows = useMemo<Row[]>(() => {
-      debugger;
       const list = charactersSearched.length > 0 ? charactersSearched : characterList
       return list.map((character: Character, index: number) => {
         const row: Row = {
