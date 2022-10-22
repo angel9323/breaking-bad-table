@@ -53,7 +53,7 @@ For application state management I have used Redux Toolkit since it leaves a cle
 
 I have used Typescript because I think it is better for reading the application about what each component receives or returns and it is better for detecting errors and warnings.
 
-To carry out tests, I have done several unit tests of two components with jest and testing-library, checking its components and some event.
+To carry out tests, I have done several unit tests of two components (AlertModal and CardText) with jest and testing-library, checking its components and some event.
 
 The Hooks-based development pattern has been used, where all the logic of the component would go inside the hooks, as can be seen in CharacterTable or ActionBar components. In addition, I use different React Hooks for greater efficiency or to save a specific state.
 

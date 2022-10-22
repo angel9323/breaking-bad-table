@@ -17,7 +17,9 @@ const setup = () => {
 describe('CardText component', () =>{
     it('renders content', () => {
         const component = setup();
-        component.getByText('Test Label:');
-        component.getByText('Test Label Value');
+        const label1 = component.getByText('Test Label:');
+        const label2 = component.getByText('Test Label Value');
+        expect(label1).toBeInTheDocument();
+        expect(label2).toBeInTheDocument();
     })
 });

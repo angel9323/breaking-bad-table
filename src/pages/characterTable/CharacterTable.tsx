@@ -20,7 +20,6 @@ const CharacterTable = () => {
     }
 
     const handleOnRowClick = (row: Row) => {
-      console.log(row);
       const characterSelected = characterList.find(char => char.char_id === row.id)
       setModalProps({open: true, character: characterSelected });
     }

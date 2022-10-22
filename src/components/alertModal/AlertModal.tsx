@@ -26,12 +26,13 @@ const AlertModal = ({onClickAcceptModal, open, setOpen}: AlertModalProps) => {
 
     return (
     <Dialog
+        data-testid='dialog-parent'
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle data-testid='dialog-title' id="alert-dialog-title">
           {titleModalLabel}
         </DialogTitle>
         <DialogContent>
@@ -40,8 +41,8 @@ const AlertModal = ({onClickAcceptModal, open, setOpen}: AlertModalProps) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>{cancelLabel}</Button>
-          <Button onClick={onClickAcceptModal} autoFocus>
+          <Button data-testid='button-cancel' onClick={handleClose}>{cancelLabel}</Button>
+          <Button data-testid='button-accept' onClick={onClickAcceptModal} autoFocus>
             {acceptLabel}
           </Button>
         </DialogActions>
