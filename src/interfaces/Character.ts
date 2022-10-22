@@ -8,4 +8,5 @@ export default interface Character {
     appearance: number[];
     nickname: string;
     portrayed: string;
+    description?: string;
 }

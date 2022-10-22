@@ -4,4 +4,5 @@ export default interface Row {
     birthday: string,
     status: string,
     nickname: string,
+    description: string,
 };

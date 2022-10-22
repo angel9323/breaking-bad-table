@@ -20,4 +20,5 @@ export const TRANSLATIONS_EN = {
   removeModalBody: 'The selected rows will be removed from the table',
   accept: 'Accept',
   cancel: 'Cancel',
+  description: 'Description',
 };

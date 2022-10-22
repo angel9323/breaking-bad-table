@@ -20,4 +20,5 @@ export const TRANSLATIONS_ES = {
   removeModalBody: 'Se eliminarán de la tabla las filas seleccionadas',
   accept: 'Aceptar',
   cancel: 'Cancelar',
+  description: 'Descripción',
  };

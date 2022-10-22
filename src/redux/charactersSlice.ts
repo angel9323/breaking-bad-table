@@ -52,11 +52,22 @@ export const charactersSlice = createSlice({
         setErrorUnknown: (state) => {
             state.errorUnknown = true;
         },
+        updateCharacter: (state, action: PayloadAction<{character: Character, newDescription: string}>) => {
+            state.charactersList =  [...state.charactersList.map(char => {
+                if(char.char_id === action.payload.character.char_id) {
+                    return { 
+                        ...action.payload.character,
+                        description: action.payload.newDescription
+                    }
+                }
+                return char;
+            })]
+        },
     }
 })
 
 export const { setCharacterList, setCharacterListSearched, setCharacterListRemoved, setAddCharacter,
-    removeFromListSearched, setLoading, setErrorUnknown } = charactersSlice.actions;
+    removeFromListSearched, setLoading, setErrorUnknown, updateCharacter } = charactersSlice.actions;
 
 export const selectCharactersList = (state: RootState) => state.characters.charactersList;
 export const selectCharactersListSearched = (state: RootState) => state.characters.characterListSearched;

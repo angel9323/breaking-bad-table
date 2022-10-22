@@ -31,12 +31,12 @@ const useCharacterTable = (): UseCharacterList => {
     const appearanceColumn = t('appearance');
     const nicknameColumn = t('nickname');
     const portrayedColumn = t('portrayed');
-
+    const descriptionColumn = t('description');
     
     const columns = useMemo(() => {
-      const columnNames = [nameColumn, birthdayColumn, statusColumn, nicknameColumn];
+      const columnNames = [nameColumn, birthdayColumn, statusColumn, nicknameColumn, descriptionColumn];
       return getConfigColumnsCharacters(columnNames);
-    }, [birthdayColumn, nameColumn, nicknameColumn, statusColumn]);
+    }, [birthdayColumn, nameColumn, nicknameColumn, statusColumn, descriptionColumn]);
 
     const rows = useMemo<Row[]>(() => {
       const list = charactersSearched.length > 0 ? charactersSearched : characterList
@@ -47,6 +47,7 @@ const useCharacterTable = (): UseCharacterList => {
           birthday: character.birthday,
           status: character.status,
           nickname: character.nickname,
+          description: character.description ? character.description : '',
         }
         return row
       });
