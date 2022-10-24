@@ -104,13 +104,4 @@ export const removeCharacters = (charactersRemoved: Character[], newCharacterLis
         }
 }
 
-// export const addCharacter = (character: Character): AppThunk => (
-//     dispatch, getState) => {
-//         dispatch(setCharacterListRemoved({charactersRemoved, newCharacterList}));
-//         if ( getState().characters.characterListSearched.length > 0 ) {
-//             const newListSearched = getState().characters.characterListSearched.filter(char => !charactersRemoved.includes(char));
-//             dispatch(removeFromListSearched(newListSearched));
-//         }
-// }
-
 export default charactersSlice.reducer;
